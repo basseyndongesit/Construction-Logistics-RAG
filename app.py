@@ -551,20 +551,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-default_lead = """We are a logistics company operating across 4 states.
-
-We currently manage 85 trucks and 5 warehouse locations.
-
-We are searching for:
-- fleet optimization software
-- warehouse visibility tools
-- automated dispatch tracking
-
-We need deployment within 60 days."""
-
 lead_input = st.text_area(
     "Lead",
-    value=default_lead,
+    value="",
+    placeholder="Describe the inbound lead here — company size, operations, what they're looking for, timeline...",
     height=200,
     label_visibility="collapsed"
 )
