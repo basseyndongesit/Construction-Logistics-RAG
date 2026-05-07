@@ -1,0 +1,25 @@
+# Secrets — never commit
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+
+# Notebooks (keep app.py clean)
+*.ipynb
+.ipynb_checkpoints/
+
+# Data
+*.pdf
+logistics_docs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual environment
+venv/
+.venv/
+env/
