@@ -447,7 +447,7 @@ with st.sidebar:
                 unsafe_allow_html=True)
 
     # API key input (only shown if not in secrets)
-    try:
+try:
     _ = st.secrets["OPENAI_API_KEY"]
     st.success("🔐 API key loaded from secrets")
 except (KeyError, FileNotFoundError):
