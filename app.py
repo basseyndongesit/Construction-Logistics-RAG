@@ -594,7 +594,7 @@ if run_button:
     os.environ["OPENAI_API_KEY"] = api_key
 
     # ── Validate PDFs ─────────────────────────────────────────
-  uploaded_files = st.session_state.get("uploaded_files", [])
+    uploaded_files = st.session_state.get("uploaded_files", [])
     if not uploaded_files:
         st.warning(
             "⚠️ No PDFs uploaded. Upload your logistics knowledge base "
