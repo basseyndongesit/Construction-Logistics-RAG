@@ -448,21 +448,16 @@ with st.sidebar:
 
     # API key input (only shown if not in secrets)
     try:
-        st.secrets["OPENAI_API_KEY"]
-        st.markdown(
-            '<div style="background:#1e3a2f;border:1px solid #059669;'
-            'border-radius:8px;padding:10px 14px;font-size:12px;color:#34d399;">'
-            '🔐 API key loaded from secrets</div>',
-            unsafe_allow_html=True
-        )
-    except (KeyError, FileNotFoundError):
-        api_key_input = st.text_input(
-            "OpenAI API Key",
-            type="password",
-            placeholder="sk-...",
-            help="Your key is used only in this session and never stored."
-        )
-        st.session_state["api_key_input"] = api_key_input
+    _ = st.secrets["OPENAI_API_KEY"]
+    st.success("🔐 API key loaded from secrets")
+except (KeyError, FileNotFoundError):
+    api_key_input = st.text_input(
+        "OpenAI API Key",
+        type="password",
+        placeholder="sk-...",
+        help="Your key is used only in this session and never stored."
+    )
+    st.session_state["api_key_input"] = api_key_input
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
