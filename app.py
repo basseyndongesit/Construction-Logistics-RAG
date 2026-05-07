@@ -222,6 +222,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# =========================================================
+# SESSION STATE INITIALIZATION
+# =========================================================
+if "uploaded_files" not in st.session_state:
+    st.session_state["uploaded_files"] = []
 
 # =========================================================
 # API KEY SETUP (from Streamlit secrets or sidebar input)
@@ -466,19 +471,15 @@ except (KeyError, FileNotFoundError):
                 'text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">'
                 'Knowledge Base</p>', unsafe_allow_html=True)
 
-    uploaded_files = st.file_uploader(
-        "Upload logistics PDFs",
-        type=["pdf"],
-        accept_multiple_files=True,
-        help="Upload your logistics SaaS product docs, pricing sheets, and playbooks."
-    )
-
-    if uploaded_files:
-        st.markdown(
-            f'<div style="font-size:12px;color:#34d399;margin-top:6px;">'
-            f'✓ {len(uploaded_files)} file(s) ready</div>',
-            unsafe_allow_html=True
-        )
+uploaded_files = st.file_uploader(
+    "Upload logistics PDFs",
+    type=["pdf"],
+    accept_multiple_files=True,
+    help="Upload your logistics SaaS product docs, pricing sheets, and playbooks."
+)
+# Store in session state so it's accessible outside the sidebar block
+if uploaded_files:
+    st.session_state["uploaded_files"] = uploaded_files
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
@@ -593,6 +594,7 @@ if run_button:
     os.environ["OPENAI_API_KEY"] = api_key
 
     # ── Validate PDFs ─────────────────────────────────────────
+  uploaded_files = st.session_state.get("uploaded_files", [])
     if not uploaded_files:
         st.warning(
             "⚠️ No PDFs uploaded. Upload your logistics knowledge base "
